@@ -1,0 +1,171 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+:root{
+    --color-dark: #000;
+    --container-max: 1344px;
+    --color-light: aliceblue;
+    --radius: 15px;
+    --color-card: #383838;
+    --color-after: rgb(200, 209, 216);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+body{
+    font-family: 'Oswald', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow-x: hidden;
+}
+.container{
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto; /* block - сверху снизу, а inline слева справа */
+    padding-inline: clamp(1rem, 4vw, 2rem);
+}
+header{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-dark);
+}
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* все элементы в одну линию, не переносятся */
+    min-height: 5rem;
+}
+.nadpis{
+    color: var(--color-light);
+    text-transform: uppercase;
+    font-size: clamp(1rem, 1.5vw + 0.5rem ,1.7rem);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    white-space: nowrap; /* nowrap - типо после пробела слово не перенесeтся вниз при маленьком экране, а останется вместе с первым словом на одной линии*/
+}
+nav{
+    display: flex;
+    gap: clamp(0.75rem, 1.5vw ,1.5rem);
+    flex-wrap: wrap; /* все элементы в одну линию, не переносятся */
+}
+.navigazia{
+    position: relative;
+    color: var(--color-light);
+    font-size: clamp(0.65rem, 1vw + 0.5rem, 1.3rem);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.navigazia::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    border-radius: var(--radius);
+    height: 0.1rem;
+    color: var(--color-light);
+    background-color: var(--color-light);
+    transition: width 0.4s var(--ease-out);
+}
+.navigazia:hover::after {
+    width: 100%;
+}
+
+.sektia{
+    padding-block: 2.5rem;
+}
+.zaglav{
+    font-size: clamp(1.75rem, 3vw + 1rem, 2.8rem);
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+.tekst{
+    font-size: clamp(1rem, 0.5vw + 0.85rem, 1.2rem);
+    font-weight: 300;
+    max-width: 100ch; /* ch - сколько букв может поместиться, в данном случае в линию может поместиться 100 символов */
+    margin-bottom: 3.5rem;
+}
+.carta{
+    background: var(--color-card);
+    padding: 2rem 1rem;
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+}
+.card-text{
+    color: var(--color-light);
+    font-size: clamp(1rem, 0.5vw + 0.75rem, 1.4rem);
+    text-transform: uppercase;
+    text-align: center;
+}
+.zaglav2{
+    font-size: clamp(1.5rem, 2.5vw + 0.8rem, 2.6rem);
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+.kontent {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 1.5vw, 1.5rem);
+    margin-bottom: 2rem;
+}
+
+.btn {
+    display: block;
+    width: fit-content;
+    margin-inline: auto;
+    padding: 0.9em 2.2em;
+    background: var(--color-dark);
+    color: var(--color-light);
+    border: 2px solid var(--color-dark);
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease, transform .15s ease;
+}
+
+.btn:hover {
+    background: aliceblue;
+    color: #000;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn:focus-visible {
+    outline: 3px solid #000;
+    outline-offset: 3px;
+}
+@media (max-width: 768px) {
+    .header-inner {
+        flex-direction: column;
+        justify-content: center;
+        padding-block: 0.75rem;
+        gap: 0.5rem;
+    }
+    .kontent {
+        grid-template-columns: 1fr;
+    }
+    .sektia {
+        padding-block: 2.5rem;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn { transition: none; }
+}
