@@ -17,6 +17,12 @@ html {
 }
 body{
     font-family: 'Oswald', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+html{
     overflow-x: hidden;
 }
 .container{
@@ -25,11 +31,31 @@ body{
     margin-inline: auto; /* block - сверху снизу, а inline слева справа */
     padding-inline: clamp(1rem, 4vw, 2rem);
 }
+main{
+    flex: 1 0 auto; /* первая цифра означает - "flex-grow" (мейн растягивается на весь свободный экран если есть свободное пространство), вторая - "flex-shrink" (контент не сжимается, по умолчанию если места не хвататет, то он сожмется), третье - "flex-basis" (с какого базового размера контент будет стартовать, в нашем случае авто, значит со своего базового, а уже потом растянется если нужно)*/
+}
 header{
     position: sticky;
     top: 0;
     z-index: 100;
     background: var(--color-dark);
+}
+footer{
+    background: var(--color-dark);
+    flex-shrink: 0;
+    bottom: 0;
+}
+.footer-inner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 5rem;
+}
+.footer-text{
+    color: var(--color-light);;
+    font-size: clamp(0.8rem, 1.2vw + 0.5rem ,1.2rem);
+    font-weight: 600;
+    white-space: nowrap; /* nowrap - типо после пробела слово не перенесeтся вниз при маленьком экране, а останется вместе с первым словом на одной линии*/
 }
 .header-inner {
     display: flex;
@@ -89,6 +115,17 @@ nav{
     font-weight: 300;
     max-width: 100ch; /* ch - сколько букв может поместиться, в данном случае в линию может поместиться 100 символов */
     margin-bottom: 3.5rem;
+}
+.tekst-contacts{
+    font-size: clamp(1rem, 0.5vw + 0.85rem, 1.2rem);
+    font-weight: 300;
+    max-width: 100ch; /* ch - сколько букв может поместиться, в данном случае в линию может поместиться 100 символов */
+}
+.tekst-about{
+    font-size: clamp(1rem, 0.5vw + 0.85rem, 1.2rem);
+    font-weight: 300;
+    max-width: 100ch; /* ch - сколько букв может поместиться, в данном случае в линию может поместиться 100 символов */
+    margin-bottom: 1.5rem;
 }
 .carta{
     background: var(--color-card);
@@ -168,4 +205,117 @@ nav{
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .btn { transition: none; }
+}
+
+.navigazia.active::after {
+    width: 100%;
+}
+
+.facts-list {
+    margin-bottom: 3.5rem;
+    padding-left: 1.5rem;
+}
+.facts-list li {
+    margin-bottom: 0.5rem;
+}
+
+.teacher-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+}
+.teacher-desc {
+    color: var(--color-light);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: clamp(1rem, 1.5vw, 1.5rem);
+}
+.course-card {
+    background: var(--color-card);
+    padding: 2rem;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
+}
+.course-title {
+    color: var(--color-light);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+.course-desc {
+    color: var(--color-after);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Текст растягивается, прижимая кнопку к низу */
+}
+.course-duration {
+    color: var(--color-light);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+.course-card .btn {
+    width: 100%;
+    padding: 0.7em 1em;
+}
+
+.contact-info {
+    margin-bottom: 3rem;
+}
+.contact-form {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.form-group label {
+    font-weight: 500;
+    font-size: 1rem;
+}
+.required {
+    color: red;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.8rem;
+    border: 2px solid #ccc;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--color-dark);
+}
+.form-message {
+    font-weight: 500;
+    margin-top: 1rem;
+    text-align: center;
+}
+.form-message.error {
+    color: red;
+}
+.form-message.success {
+    color: green;
+}
+
+@media (max-width: 768px) {
+    .course-card {
+        min-height: auto;
+    }
 }
